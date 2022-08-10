@@ -22,12 +22,11 @@ def checkCard():
       n += 1
     # Add all the digits
     sum += digits
-  print(sum)
   # Determine check digit
   check_digit = 10 - (sum % 10)
-  print(check_digit)
   # Determine if number is valid
-  return (payload + str(check_digit) == card_num)
+  if payload + str(check_digit) == card_num:
+    print("It's a valid credit card number")
 
 # Code to check type (American Express, Visa, Discover Card, and Mastercard)
 def checkType():
@@ -39,12 +38,11 @@ def checkType():
   if (length == 15) and ((card_num[0:2] == str(34)) or (card_num[0:2] == str(37))):
     print("The credit card is an American Express.")
   # Check if card is Visa
-  if card_num[0] == str(4) and ((length == 13) or (length == 16)):
+  elif card_num[0] == str(4) and ((length == 13) or (length == 16)):
     print("The credit card is a Visa.")
   # Check if card is Discover 
-  elif (length < 20) and (length > 15):
-    if ((card_num.startswith("65")) or (card_num.startswith("6011")) or (int(card_num[0:3]) < 650 and int(card_num[0:3]) > 643) or (int(card_num[0:6]) < 622926 and int(card_num[0:6]) > 622125)):
-      print("The credit card is a Discover Card.")
+  elif (length < 20) and (length > 15) and ((card_num.startswith("65")) or (card_num.startswith("6011")) or (int(card_num[0:3]) < 650 and int(card_num[0:3]) > 643) or (int(card_num[0:6]) < 622926 and int(card_num[0:6]) > 622125)):
+    print("The credit card is a Discover Card.")
   # Check if card is Mastercard
   elif (length == 16) and ((int(card_num[0:2]) < 56 and int(card_num[0:2]) > 50) or (int(card_num[0:4]) < 2721) and (int(card_num[0:4]) > 2220)):
     print("The credit card is a MasterCard.")
@@ -55,11 +53,11 @@ def playAgain():
     choice = input("Would you like to check (v)alidation, (t)ype, or quit? ")
     # Validation
     if choice == "v":
-      print(checkCard())
+      checkCard()
     # Type
     elif choice == "t":
-      checkType()
     # Quit
+      checkType()
     elif choice == "q":
       break
   
